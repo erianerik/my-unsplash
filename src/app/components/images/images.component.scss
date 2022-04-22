@@ -30,8 +30,24 @@
             background-color: #eb5757;
         }
     }
+
+    .image__description {
+        display: none;
+        padding: 2em 1em;
+        line-height: 1.2em;
+        font-size: 1.3em;
+        font-weight: 600;
+        text-align: left;
+        overflow-wrap: break-word;
+        text-shadow: 1px 0px 10px #000;
+        color: #fff;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
 }
 
-.image-container:hover > .remove-photo-button {
+.image-container:hover > .remove-photo-button,
+.image-container:hover > .image__description {
     display: block;
 }
