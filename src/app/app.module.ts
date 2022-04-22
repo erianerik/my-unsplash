@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ImagesComponent } from './components/images/images.component';
 import { AddImageComponent } from './components/add-image/add-image.component';
+import { RemoveImageComponent } from './components/remove-image/remove-image.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     ImagesComponent,
-    AddImageComponent
+    AddImageComponent,
+    RemoveImageComponent
   ],
   imports: [
     BrowserModule,
