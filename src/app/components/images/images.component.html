@@ -1,7 +1,7 @@
 <div class="grid-image">
-    <div class="image-container">
-        <button class="remove-photo-button">Excluir</button>
-        <img class="image" src="https://images.unsplash.com/photo-1600494448868-9fbd1ac2d9f5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80">
-        <p class="image__description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus, beatae. </p>
+    <div class="image-container" *ngFor="let image of images">
+        <button class="remove-photo-button" (click)="removeImage(image.id)">Excluir</button>
+        <img class="image" src="{{ image.url }}">
+        <p class="image__description">{{image.description}} </p>
     </div>
 </div>
