@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ImageServiceService {
+export class ImageService{
 
   private url: string = 'http://localhost:8080/image';
   images: Image[] = [];
@@ -18,5 +18,9 @@ export class ImageServiceService {
 
   getImages():Observable<Image[]> {
     return this.httpCliente.get<Image[]>(this.url);
+  }
+
+  addImage(image: Image):Observable<Image> {
+    return this.httpCliente.post<Image>(this.url, image);
   }
 }

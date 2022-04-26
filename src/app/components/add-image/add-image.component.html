@@ -1,18 +1,30 @@
 <div class="modal">
-    <form class="form">
+    <form class="form" [formGroup]="imageForm">
         <h2 class="form__title">Adicionar nova imagem</h2>
         <div class="form__container">
             <fieldset class="form__fields">
                 <label class="field__name">Descrição:</label>
-                <input type="text" class="field__input input" placeholder="Cesta de chocolates" />
-           
+                <input 
+                    type="text" 
+                    formControlName="description"
+                    class="field__input input" 
+                    [ngClass]="{'input-erro': imageForm.get('description')?.invalid && imageForm.get('description')?.touched }"
+                    placeholder="Cesta de chocolates"  />
+                    <span class="input-erro-message" *ngIf=" imageForm.get('description')?.invalid && imageForm.get('description')?.touched">Campo inválido</span>
+
                 <label class="field__name">Imagem url:</label>
-                <input type="text" class="field__input input" placeholder="https://images.unsplash.com/photo-1638913976381-5b8ed66c36d6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" />
+                <input  
+                    type="text" 
+                    formControlName="url" 
+                    class="field__input input" 
+                    [ngClass]="{'input-erro': imageForm.get('url')?.invalid && imageForm.get('url')?.touched }"
+                    placeholder="https://images.unsplash.com/photo-1638913976381-5b8ed66c36d6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfH" />
+                <span class="input-erro-message" *ngIf=" imageForm.get('url')?.invalid && imageForm.get('url')?.touched">Campo inválido</span>
             </fieldset>
 
             <fieldset class="form__actions">
-                <button class="button button--cancel">Cancelar</button>
-                <button class="button button--green">Adicionar</button>
+                <button class="button button--cancel" (click)="closeModalAddImage(false)">Cancelar</button>
+                <button class="button button--green" (click)="addImage()">Adicionar</button>
             </fieldset>
         </div>
     </form>

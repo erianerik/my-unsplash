@@ -8,4 +8,13 @@ import { Component } from '@angular/core';
 export class AppComponent {
   addImageModal = false;
   removeImageModal = false;
+
+  showModalAddImage(event: boolean) {
+    this.addImageModal = event;
+  }
+
+  closeModalAddImage(event: boolean) {
+    this.addImageModal = event;
+  }
+
 }
