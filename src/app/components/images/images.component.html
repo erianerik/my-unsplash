@@ -1,6 +1,6 @@
 <div class="grid-image">
     <div class="image-container" *ngFor="let image of images">
-        <button class="remove-photo-button" (click)="removeImage(image.id)">Excluir</button>
+        <button class="remove-photo-button" (click)="showRemoveImageModal(image.id)">Excluir</button>
         <img class="image" src="{{ image.url }}">
         <p class="image__description">{{image.description}} </p>
     </div>

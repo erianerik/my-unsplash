@@ -10,7 +10,7 @@
                     class="field__input input" 
                     [ngClass]="{'input-erro': imageForm.get('description')?.invalid && imageForm.get('description')?.touched }"
                     placeholder="Cesta de chocolates"  />
-                    <span class="input-erro-message" *ngIf=" imageForm.get('description')?.invalid && imageForm.get('description')?.touched">Campo inválido</span>
+                    <span class="input-erro-message" *ngIf="imageForm.get('description')?.invalid && imageForm.get('description')?.touched">Campo inválido</span>
 
                 <label class="field__name">Imagem url:</label>
                 <input  

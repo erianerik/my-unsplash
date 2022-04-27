@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Image } from './../../model/image';
+import { ImageService } from './../../service/image.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-remove-image',
@@ -7,9 +10,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RemoveImageComponent implements OnInit {
 
-  constructor() { }
+  @Output() closeModalEmitter = new EventEmitter<boolean>();
+  @Input() idImage: any;
+
+  removeImageForm!: FormGroup;
+
+  constructor(
+    private imageService: ImageService,
+    private formBuild: FormBuilder
+  ) { }
 
   ngOnInit(): void {
+    console.log(this.idImage);
+    this.removeImageForm = this.formBuild.group({ password: ['', Validators.required] });
+  }
+
+  closeModal(closeModal: boolean) {
+    this.closeModalEmitter.emit(closeModal);
+  }
+
+  removeImage() {
+    const fieldPassword = this.removeImageForm.controls['password'];
+    if(fieldPassword.invalid) {
+      fieldPassword.markAsTouched();
+      return;
+    }
+    this.imageService.removeImage(this.idImage, fieldPassword.value).subscribe((response) => {
+      console.log(response);
+    });
   }
 
 }

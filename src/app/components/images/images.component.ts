@@ -1,5 +1,5 @@
 import { ImageService } from '../../service/image.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Image } from 'src/app/model/image';
 
 @Component({
@@ -9,6 +9,7 @@ import { Image } from 'src/app/model/image';
 })
 export class ImagesComponent implements OnInit {
 
+  @Output() showRemoveModalEmitter = new EventEmitter<any>();
   images: Image[] = [];
 
   constructor(
@@ -26,8 +27,8 @@ export class ImagesComponent implements OnInit {
     });
   }
 
-  removeImage(id: any) {
-    console.log("Id da imagem: ", typeof id);
+  showRemoveImageModal(id: any) {
+   this.showRemoveModalEmitter.emit(id);
   }
 
 }
