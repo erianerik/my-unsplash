@@ -1,6 +1,6 @@
 <main>
-  <app-header (showModalAddImageEmitter)="showModalAddImage($event)"></app-header>
-  <app-images (showRemoveModalEmitter)="showRemoveImageModal($event)"></app-images>
-  <app-add-image (closeModalAddImageEmitter)="closeModalAddImage($event)" *ngIf="addImageModal"></app-add-image>
-  <app-remove-image [idImage]="idImage" (closeModalEmitter)="closeModal($event)" *ngIf="removeImageModal"></app-remove-image>
+  <app-header></app-header>
+  <app-images></app-images>
+  <app-add-image *ngIf="addImageModal"></app-add-image>
+  <app-remove-image *ngIf="removeImageModal" [idImage]="idImage"></app-remove-image>
 </main>

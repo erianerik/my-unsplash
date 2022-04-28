@@ -1,7 +1,9 @@
+import { BroadcastService } from './../../service/broadcast/broadcast.service';
 import { ImageService } from '../../service/image.service';
 import { Image } from './../../model/image';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Modal } from 'src/app/model/modal';
 
 @Component({
   selector: 'app-add-image',
@@ -10,11 +12,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class AddImageComponent implements OnInit {
   imageForm!: FormGroup;
-
-  @Output() closeModalAddImageEmitter = new EventEmitter<boolean>();
+  modal = new Modal();
 
   constructor(
     private imageService: ImageService,
+    private broadcastService: BroadcastService,
     private formBuilder: FormBuilder
   ) { }
 
@@ -29,8 +31,10 @@ export class AddImageComponent implements OnInit {
     });
   }
 
-  closeModalAddImage(event: boolean) {
-    return this.closeModalAddImageEmitter.emit(event);
+  closeModal() {
+    this.modal.name = 'add-image';
+    this.modal.show = false;
+    this.broadcastService.setModalSubject(this.modal);
   }
 
   addImage() {

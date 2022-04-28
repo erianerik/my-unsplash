@@ -1,3 +1,5 @@
+import { Modal } from 'src/app/model/modal';
+import { BroadcastService } from './service/broadcast/broadcast.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -8,24 +10,20 @@ import { Component } from '@angular/core';
 export class AppComponent {
   addImageModal = false;
   removeImageModal = false;
-  idImage:any;
+  idImage: any;
 
-  showModalAddImage(event: boolean) {
-    this.addImageModal = event;
+
+  constructor(
+    private broadcastService: BroadcastService
+  ) {
+    this.broadcastService.getModalSubject().subscribe((modal: Modal) => {
+      if (modal.name === 'add-image') {
+        this.addImageModal = modal.show;
+      }
+      if (modal.name === 'delete-image') {
+        this.removeImageModal = modal.show;
+        this.idImage = modal.data;
+      }
+    });
   }
-  
-  showRemoveImageModal(idImage: any) {
-    this.idImage = idImage;
-    this.removeImageModal = idImage ? true : false;
-  }
-
-  closeModalAddImage(event: boolean) {
-    this.addImageModal = event;
-  }
-
-  closeModal(closeModal: boolean) {
-    this.removeImageModal = closeModal;
-  }
-
-
 }

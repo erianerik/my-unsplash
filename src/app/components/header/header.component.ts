@@ -1,3 +1,5 @@
+import { Modal } from 'src/app/model/modal';
+import { BroadcastService } from './../../service/broadcast/broadcast.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
@@ -7,15 +9,19 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  @Output() showModalAddImageEmitter = new EventEmitter<boolean>();
+  modal = new Modal();
 
-  constructor() { }
+  constructor(
+    private broadcastService: BroadcastService
+  ) { }
 
   ngOnInit(): void {
   }
 
-  showModalAddImage(event: boolean) {
-    this.showModalAddImageEmitter.emit(event);
+  showModal() {
+    this.modal.name = 'add-image';
+    this.modal.show = true;
+    this.broadcastService.setModalSubject(this.modal);
   }
 
 }

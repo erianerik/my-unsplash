@@ -1,6 +1,8 @@
+import { BroadcastService } from './../../service/broadcast/broadcast.service';
 import { ImageService } from '../../service/image.service';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Image } from 'src/app/model/image';
+import { Modal } from 'src/app/model/modal';
 
 @Component({
   selector: 'app-images',
@@ -9,10 +11,11 @@ import { Image } from 'src/app/model/image';
 })
 export class ImagesComponent implements OnInit {
 
-  @Output() showRemoveModalEmitter = new EventEmitter<any>();
+  modal = new Modal();
   images: Image[] = [];
 
   constructor(
+    private broadcastService: BroadcastService,
     private imageService: ImageService
   ) { }
 
@@ -27,8 +30,11 @@ export class ImagesComponent implements OnInit {
     });
   }
 
-  showRemoveImageModal(id: any) {
-   this.showRemoveModalEmitter.emit(id);
+  showModal(id: any) {
+    this.modal.name = 'delete-image';
+    this.modal.show = true;
+    this.modal.data = id;
+    this.broadcastService.setModalSubject(this.modal);
   }
 
 }
