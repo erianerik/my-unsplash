@@ -1,0 +1,4 @@
+<div class="alert" *ngIf="showAlert" [ngClass]="typeAlert()">
+    <h2 class="alert__title">{{ titleAlert }}</h2>
+    <p class="alert__description">{{ alert.message }}</p>
+</div>

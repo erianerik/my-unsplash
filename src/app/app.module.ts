@@ -9,6 +9,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { ImagesComponent } from './components/images/images.component';
 import { AddImageComponent } from './components/add-image/add-image.component';
 import { RemoveImageComponent } from './components/remove-image/remove-image.component';
+import { AlertComponent } from './shared/alert/alert.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { RemoveImageComponent } from './components/remove-image/remove-image.com
     HeaderComponent,
     ImagesComponent,
     AddImageComponent,
-    RemoveImageComponent
+    RemoveImageComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,

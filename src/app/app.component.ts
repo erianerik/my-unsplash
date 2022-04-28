@@ -10,6 +10,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   addImageModal = false;
   removeImageModal = false;
+  showAlert = false;
   idImage: any;
 
   constructor(
@@ -18,6 +19,9 @@ export class AppComponent {
     this.broadcastService.getModalSubject().subscribe((modal: Modal) => {
       if (modal.name === 'add-image') {
         this.addImageModal = modal.show;
+      }
+      if(modal.name === 'alert') {
+        this.showAlert = modal.show;
       }
       if (modal.name === 'delete-image') {
         this.removeImageModal = modal.show;
