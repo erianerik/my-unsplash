@@ -17,7 +17,11 @@ export class ImagesComponent implements OnInit {
   constructor(
     private broadcastService: BroadcastService,
     private imageService: ImageService
-  ) { }
+  ) { 
+    this.imageService.getUpdateImage().subscribe((images: Image[]) => {
+      this.images = images;
+    });
+  }
 
   ngOnInit(): void {
     this.getImages();

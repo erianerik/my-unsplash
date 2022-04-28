@@ -12,7 +12,6 @@ export class AppComponent {
   removeImageModal = false;
   idImage: any;
 
-
   constructor(
     private broadcastService: BroadcastService
   ) {
