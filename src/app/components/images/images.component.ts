@@ -19,6 +19,8 @@ export class ImagesComponent implements OnInit {
     private imageService: ImageService
   ) { 
     this.imageService.getUpdateImage().subscribe((images: Image[]) => {
+      console.log('não entrou?');
+      
       this.images = images;
     });
   }

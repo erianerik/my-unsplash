@@ -25,14 +25,16 @@ export class ImageService {
     return this.httpCliente.get<Image[]>(this.url);
   }
 
+  setImages(images: Image[]) {
+    this.imageSubject.next(images);
+  }
+
   addImage(image: Image): Observable<Image> {
     return this.httpCliente.post<Image>(this.url, image);
   }
 
   removeImage(idImage: any, password: string) {
-    this.images = this.images.filter(image => image.id !== idImage);
-    this.imageSubject.next(this.images);
-    return this.httpCliente.delete(`${this.url}${idImage}`, {body: password});
+    return this.httpCliente.delete(`${this.url}${idImage}`, { body: password });
   }
 
 }

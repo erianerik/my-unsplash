@@ -48,12 +48,17 @@ export class RemoveImageComponent implements OnInit {
       return;
     }
     this.imageService.removeImage(this.idImage, fieldPassword.value).subscribe((response: any) => {
+      if (response.status) { this.updateListImages(this.idImage); }
       this.alert.message = response.message;
       this.alert.type = response.status ? 'success' : 'error';
       this.removeImageForm.reset();
       this.broadcastService.setAlert(this.alert);
       this.closeModal();
     });
+  }
+
+  updateListImages(idImage: any) {
+    this.imageService.setImages(this.imageService.images.filter(image => image.id !== idImage));
   }
 
 }
