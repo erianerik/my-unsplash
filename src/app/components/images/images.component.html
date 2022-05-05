@@ -4,4 +4,10 @@
         <img class="image" src="{{ image.url }}">
         <p class="image__description">{{image.description}} </p>
     </div>
+    <h2 class="grid-image__non-images" *ngIf="images.length === 0">Nenhuma imagem cadastrada...</h2>
+</div>
+
+<div class="server-error" *ngIf="serverError">
+    <h2>Ops, tivemos um erro interno</h2>
+    <button class="button button--outline-green" (click)="getImages()">Tentar novamente</button>
 </div>

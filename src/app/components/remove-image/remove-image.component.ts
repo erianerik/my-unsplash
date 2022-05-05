@@ -26,7 +26,6 @@ export class RemoveImageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.idImage);
     this.removeImageForm = this.formBuild.group({ password: ['', Validators.required] });
   }
 
@@ -63,7 +62,8 @@ export class RemoveImageComponent implements OnInit {
   }
 
   updateListImages(idImage: any) {
-    this.imageService.setImages(this.imageService.images.filter(image => image.id !== idImage));
+    this.imageService.images = this.imageService.images.filter(image => image.id !== idImage)
+    this.imageService.setImages(this.imageService.images);
   }
 
 }

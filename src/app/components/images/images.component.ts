@@ -11,6 +11,7 @@ import { Modal } from 'src/app/model/modal';
 })
 export class ImagesComponent implements OnInit {
 
+  serverError = false;
   modal = new Modal();
   images: Image[] = [];
 
@@ -31,6 +32,8 @@ export class ImagesComponent implements OnInit {
     this.imageService.getImages().subscribe((images: Image[]) => {
       this.imageService.images = images;
       this.images = images as Image[];
+    }, err => {
+      this.serverError = true;
     });
   }
 
