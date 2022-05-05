@@ -1,7 +1,7 @@
 <div class="header">
     <div class="header__search">
         <img src="./assets/my_unsplash_logo.svg" class="header-logo" alt="">
-        <input type="text" class="header__input" placeholder="Buscar imagem por nome" />
+        <input type="text" (keyup)="filterImage($event)" class="header__input" placeholder="Buscar imagem por nome" />
     </div>
 
     <button class="button button--green" (click)="showModal()">Adicionar Imagem</button>
