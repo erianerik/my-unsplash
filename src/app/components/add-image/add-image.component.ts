@@ -4,6 +4,7 @@ import { Image } from './../../model/image';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Modal } from 'src/app/model/modal';
+import { Alert } from 'src/app/model/alert';
 
 @Component({
   selector: 'app-add-image',
@@ -27,7 +28,7 @@ export class AddImageComponent implements OnInit {
   createImageFrom(image: Image) {
     this.imageForm = this.formBuilder.group({
       description: [image?.description, [Validators.required]],
-      url: [image?.url, [Validators.required]] 
+      url: [image?.url, [Validators.required]]
     });
   }
 
@@ -38,19 +39,34 @@ export class AddImageComponent implements OnInit {
   }
 
   addImage() {
-    if(this.validateForm()) {
+    let showAlert = new Modal();
+    showAlert.show = true;
+    showAlert.name = 'alert';
+    this.broadcastService.setModalSubject(showAlert);
+
+    if (this.validateForm()) {
       this.imageService.addImage(this.imageForm.value).subscribe((response: Image) => {
         this.imageService.images.push(response);
         this.imageForm.reset();
+        this.showAlert('Imagem inserida com sucesso', 'success');
+      }, err => {
+        this.showAlert('Tente novamente', 'error');
       });
     }
   }
 
+  showAlert(message: string, type: string) {
+    let alert = new Alert();
+    alert.message = message;
+    alert.type = type;
+    this.broadcastService.setAlert(alert);
+  }
+
   validateForm(): boolean {
     const formControls = this.imageForm.controls;
-    for(let inputForm in formControls) {
-      if(formControls[inputForm].invalid) {
-         formControls[inputForm].markAsTouched();
+    for (let inputForm in formControls) {
+      if (formControls[inputForm].invalid) {
+        formControls[inputForm].markAsTouched();
       }
     }
 
