@@ -23,9 +23,9 @@ export class HeaderComponent implements OnInit {
   }
 
   filterImage(event: any) {
-    let text: string = event.target.value.toString();
+    let text: string = event.target.value;
     this.images = this.imageService.images;
-    this.images = this.images.filter(image => image.description.toLocaleLowerCase().includes(text));
+    this.images = this.images.filter(image => image.description.toLocaleLowerCase().includes(text.toLocaleLowerCase()));
     this.imageService.setImages(this.images);
 
   }

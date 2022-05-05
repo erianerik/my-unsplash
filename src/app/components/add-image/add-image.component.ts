@@ -39,20 +39,20 @@ export class AddImageComponent implements OnInit {
   }
 
   addImage() {
+    if (!this.validateForm()) return;
+
     let showAlert = new Modal();
     showAlert.show = true;
     showAlert.name = 'alert';
     this.broadcastService.setModalSubject(showAlert);
 
-    if (this.validateForm()) {
-      this.imageService.addImage(this.imageForm.value).subscribe((response: Image) => {
-        this.imageService.images.push(response);
-        this.imageForm.reset();
-        this.showAlert('Imagem inserida com sucesso', 'success');
-      }, err => {
-        this.showAlert('Tente novamente', 'error');
-      });
-    }
+    this.imageService.addImage(this.imageForm.value).subscribe((response: Image) => {
+      this.imageService.images.push(response);
+      this.imageForm.reset();
+      this.showAlert('Imagem inserida com sucesso', 'success');
+
+      error: () => this.showAlert('Tente novamente', 'error');
+    });
   }
 
   showAlert(message: string, type: string) {

@@ -37,22 +37,27 @@ export class RemoveImageComponent implements OnInit {
   }
 
   removeImage() {
-    let showAlert = new Modal();
-    showAlert.show = true;
-    showAlert.name = 'alert';
-    this.broadcastService.setModalSubject(showAlert);
-
     const fieldPassword = this.removeImageForm.controls['password'];
     if (fieldPassword.invalid) {
       fieldPassword.markAsTouched();
       return;
     }
+
+    let showAlert = new Modal();
+    showAlert.show = true;
+    showAlert.name = 'alert';
+    this.broadcastService.setModalSubject(showAlert);
+
     this.imageService.removeImage(this.idImage, fieldPassword.value).subscribe((response: any) => {
-      if (response.status) { this.updateListImages(this.idImage); }
       this.alert.message = response.message;
       this.alert.type = response.status ? 'success' : 'error';
       this.removeImageForm.reset();
       this.broadcastService.setAlert(this.alert);
+      if (response.status) {
+        this.updateListImages(this.idImage);
+      } else {
+        return;
+      }
       this.closeModal();
     });
   }

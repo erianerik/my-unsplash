@@ -19,13 +19,17 @@ export class AlertComponent implements OnInit {
     this.broadcast.showAlert().subscribe((alert: Alert) => {
       this.alert = alert
       this.typeAlert();
+      this.displayAlert();
     });
   }
 
   ngOnInit(): void {
+  }
+
+  displayAlert() {
     setTimeout(() => {
       this.showAlert = false;
-    }, 6000);
+    }, 3000);
     this.showAlert = true;
   }
 
